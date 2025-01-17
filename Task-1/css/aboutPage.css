@@ -1,0 +1,75 @@
+section {
+    width: 100%;
+    color: rgb(0, 0, 0);
+  }
+  
+  section .about-head {
+    padding-top: 50px;
+    padding-left: 30px;
+    font-size: 25px;
+    font-weight: 800;
+  }
+  
+  section .about-content {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 50% auto;
+  }
+  
+  section .about-content .about-image img {
+    padding: 19px;
+    width: 100%;
+  }
+  
+  section .about-para {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 19px;
+    text-align: justify;
+  }
+  
+  @media (min-width: 300px) and (max-width: 1300px) {
+    section .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+  
+  @media (min-width: 600px) and (max-width: 1300px) {
+    section .about-head {
+      text-align: center;
+      padding: 30px;
+      font-size: 25px;
+    }
+  
+    section .about-content .about-para {
+      font-size: 17px;
+    }
+  }
+  
+  @media (min-width: 450px) and (max-width: 600px) {
+    section .about-head {
+      text-align: center;
+      padding: 20px;
+      font-size: 20px;
+    }
+  }
+  
+  @media (min-width: 350px) and (max-width: 450px) {
+    section .about-head {
+      text-align: center;
+      padding: 20px;
+      font-size: 17px;
+    }
+  }
+  
+  @media (max-width: 350px) {
+    section .about-head {
+      text-align: center;
+      padding: 20px;
+      font-size: 15px;
+    }
+  }

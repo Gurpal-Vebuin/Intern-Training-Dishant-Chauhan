@@ -1,0 +1,276 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Box Cricket</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+        <!-- Local CSS Files -->
+        <link rel="stylesheet" href="/css/index.css">
+        <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/landingPage.css">
+        <link rel="stylesheet" href="/css/aboutPage.css">
+        <link rel="stylesheet" href="/css/services.css">
+        <link rel="stylesheet" href="/css/contactUs.css">
+        <link rel="stylesheet" href="/css/footer.css">
+        <link rel="stylesheet" href="/css/animation.css">
+     </head>
+    <body>
+   
+      <!-- Bat-Ball Animation -->
+       <div class="field" id="field">
+        <img src="/Images/Cricket_Bat.png" alt="Cricket-Bat Image" class="bat">
+        <div class="ball"></div>
+        <div class="bails">
+          <div class="bails-1"></div>
+          <div class="bails-2"></div>
+        </div>
+          <div class="stumps-1"></div>
+          <div class="stumps-2"></div>
+          <div class="stumps-3"></div>
+       </div>
+      <!-- Scrolling Text -->
+       <div class="scrolling-text-container left" id="scrolling">
+        <span>Match Update</span>
+        <marquee behavior="" direction="left">CSK vs RCB, MI vs KKR, PK vs DC, SRH vs GT</marquee>
+       </div>
+        <!-- Navbar -->
+        <nav id="nav">
+            <div class="logo">
+                Box-Crick
+            </div>
+            <ul id="menuList">
+                <li class="nav-item">
+                    <a href="#home" id="home-tag">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about-us" id="about-tag" onclick="toggleMenu()">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" id="services-tag" onclick="toggleMenu()">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact-us" id="contact-tag" onclick="toggleMenu()">Contact</a>
+                </li>
+                  <button class="btn-nav" onclick="toggleMenu()">Login</button>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <p onclick="toggleMenu()">&#9776;</p>
+            </div>
+        </nav>
+
+        <!-- Landing Page -->
+          <section id="home">
+            <section class="landing">
+              <label>
+                "Experience the Thrill of Cricket Like Never Before Welcome to Box Cricket League!"
+              </label>
+            </section>
+                <button class="book-now">Book Now! 
+                </button>
+          </section>
+
+          <section id="about-us">
+            <div class="about-head">
+                <h1>About Box Cricket</h1>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="/Images/cricket_ground.webp" alt="Cricket-Ground Image">
+                </div>
+                <div class="about-para">
+                    <p>              
+                        <b>Box Cricket</b> is a modified version of traditional cricket, played in a smaller, enclosed space, often indoors. It's fast, it's fun, and it's perfect for those who love the thrill of cricket but in a more dynamic, compact form. With quick boundaries, high energy, and minimal space, the game offers an exciting alternative to the conventional cricket field, making it accessible to more people.
+                    </p>
+
+                    <p>
+                        <b>Box Cricket Leagues</b>: In recent years, Box Cricket Leagues have gained popularity. These leagues are a hit in urban areas where the traditional game of cricket may not be feasible due to the lack of space. Box Cricket brings the community together, with enthusiasts enjoying both competitive and social formats of the game. The tournaments are typically fast, with matches lasting only a couple of hours—perfect for those who want the excitement of a cricket match without the commitment of a full-day game.
+                    </p>
+                    
+                    <p>
+                        <b>How It's Played</b>: The basic rules of Box Cricket are similar to traditional cricket but adapted for the smaller, enclosed format. Teams usually consist of 5 to 7 players, and the match is played with fewer overs. The boundaries are closer, and walls are often used as a part of the play, allowing the ball to bounce off them. This adds a unique twist to traditional cricket tactics.
+                    </p>
+
+                    <p>
+                        The pitch is smaller, with both batsmen and bowlers needing to adjust their strategies accordingly. Since the game is played in an enclosed area, every run and every ball is more valuable, as there’s less room for error. A single miss or miscalculation can turn the game around. Perfect for youth leagues, recreational play, and even corporate team-building events, Box Cricket is a fantastic way to get active, enjoy friendly competition, and experience the thrill of the game in a new, exciting format.
+                    </p>
+                    </div>
+            </div>
+          </section>
+
+          <section class="services" id="services">
+            <div class="services-head">
+                Our Services
+            </div>
+            <div class="services-section">
+                <div class="services-card">
+                        <img src="/Images/low_fees.png" alt="boxcricket_image" class="card-image">
+                    <div class="card-content">
+                        <h3>
+                            Low Registration Fees
+                        </h3>
+                        <p>
+                            A Simple Registration process having low Registration fees.
+                        </p>
+                    </div>
+                </div>
+                <div class="services-card">
+                    <img src="/Images/professional.jpg" alt="boxcricket_image" class="card-image">
+
+                    <div class="card-content">
+                        <h3>
+                            Professional Level Match Experience
+                        </h3>
+                        <p>
+                            A dynamic platform providing the much-needed National-level Match Exposure.                    </p>
+                    </div>
+                </div>
+                <div class="services-card">
+                    <img src="/Images/media_camera.webp" alt="boxcricket_image" class="card-image">
+
+                    <div class="card-content">
+                        <h3>
+                            National Media Exposure                   
+                        </h3>
+                        <p>
+                            Our facility is covered by the National Media so that our players are recognized nationally.                    </p>
+                    </div>
+                </div>
+                <div class="services-card">
+                    <img src="/Images/boxcricket.jpg" alt="boxcricket_image" class="card-image">
+
+                    <div class="card-content">
+                        <h3>
+                            Excellent Playing Environment                    
+                        </h3>
+                        <p>
+                            We focus on all aspects of the game like batting, bowling, and fielding providing an excellent playing environment.
+                        </p>
+                    </div>
+                </div>
+                <div class="services-card">
+                    <img src="/Images/environment.avif" alt="boxcricket_image" class="card-image">
+
+                    <div class="card-content">
+                        <h3>
+                            Exciting Prize Money                    
+                        </h3>
+                        <p>
+                            Attractive prize money for the winning team.
+                        </p>
+                    </div>
+                </div>
+                <div class="services-card">
+                    <img src="/Images/certificate.jpg" alt="boxcricket_image" class="card-image">
+                    <div class="card-content">
+                        <h3>
+                            Participant Certificate                    
+                        </h3>
+                        <p>
+                            Certificate of Participation for all participating cricket players.
+                        </p>
+                    </div>
+                </div>
+            </div>
+          </section>
+
+          <section class="contact-us" id="contact-us">
+              <div class="container">
+                    <div class="contact-head">
+                        Contact-Us
+                    </div>
+                    <div class="content">
+                      <div class="left-side">
+                        <div class="address details">
+                          <i class="fas fa-map-marker-alt"></i>
+                          <div class="topic">Address</div>
+                          <div class="text-one">Surkhet, NP12</div>
+                          <div class="text-two">Navrangpura</div>
+                        </div>
+                        <div class="phone details">
+                          <i class="fas fa-phone-alt"></i>
+                          <div class="topic">Phone</div>
+                          <div class="text-one">+91 97236 47062</div>
+                          <div class="text-two">+91 70416 52332</div>
+                        </div>
+                        <div class="email details">
+                          <i class="fas fa-envelope"></i>
+                          <div class="topic">Email</div>
+                          <div class="text-one">boxcricket@gmail.com</div>
+                          <div class="text-two">info.boxcricket@gmail.com</div>
+                        </div>
+                      </div>
+                      <div class="right-side">
+                        <div class="topic-text">Send us a message</div>
+                        <p>If you have any work from me or any types of quries related to box-cricket, you can send us message from here. It's our pleasure to help you.</p>
+                      <form action="#">
+                        <div class="input-box">
+                          <input type="text" placeholder="Enter your name">
+                        </div>
+                        <div class="input-box">
+                          <input type="text" placeholder="Enter your email">
+                        </div>
+                        <div class="input-box message-box">
+                          <input type="text" placeholder="Enter your message">
+                        </div>
+                        <div class="button">
+                          <input type="button" value="Send Now" >
+                        </div>
+                      </form>
+                    </div>
+                    </div>
+                </div>
+            </section>
+
+          <!--  Footer Starts-->
+          <section class="footer">
+            <div class="footer-row">
+              <div class="footer-col">
+                <h4>Info</h4>
+                <ul class="links">
+                  <li><a href="#about-us">About Us</a></li>
+                  <li><a href="#">Total Grounds</a></li>
+                  <li><a href="#">Customers</a></li>
+                  <li><a href="#services">Service</a></li>
+                  <li><a href="#">Upcoming Tournaments</a></li>
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>Explore</h4>
+                <ul class="links">
+                  <li><a href="#">Free Designs</a></li>
+                  <li><a href="#">Latest Designs</a></li>
+                  <li><a href="#">Themes</a></li>
+                  <li><a href="#">Popular Designs</a></li>
+                  <li><a href="#">Art Skills</a></li>
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>Legal</h4>
+                <ul class="links">
+                  <li><a href="#">Customer Agreement</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="#">GDPR</a></li>
+                  <li><a href="#">Security</a></li>
+                  <li><a href="#">Testimonials</a></li>
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>Box-Cricket</h4>
+                <p>
+                  Subscribe to our box-cricket for a weekly dose
+                  of healthy cricket style with proper enjoyment in playing.
+                </p>
+                <form action="#">
+                  <input type="text" placeholder="Your email" required>
+                  <button type="submit">SUBSCRIBE</button>
+                </form> 
+              </div>
+            </div>
+          </section>
+          
+          <!--  Footer Ends-->
+
+          <script src="js/index.js"></script>
+    </body>
+    </html>
