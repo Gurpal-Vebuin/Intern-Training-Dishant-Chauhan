@@ -1,0 +1,156 @@
+* {
+  box-shadow: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* body{ */
+/* background-color: aqua; */
+/* }  */
+
+.todo-head {
+  margin: 30px;
+  text-align: center;
+  color: #124c81;
+}
+
+.todo {
+  margin: 40px auto;
+  width: 400px;
+  /* height: 200px; */
+  background-color: #124c81;
+  border-radius: 20px;
+  /* border-top-left-radius: 20px; */
+  /* border-top-right-radius: 20px; */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.todo input {
+  margin: 20px;
+  width: 60%;
+  height: 20px;
+}
+
+.todo input[type="text"] {
+  padding: 3px;
+  font-weight: 600;
+}
+
+.todo button {
+  width: 20%;
+  padding: 4px;
+  font-size: 15px;
+  border: none;
+  background-color: red;
+  color: white;
+}
+
+.todo button:hover {
+  background-color: green;
+  transition: background-color 0.2s ease-out;
+}
+
+.todo-table .table-head {
+  width: 100%;
+  color: white;
+}
+
+.todo-table .table-head th {
+  padding: 5px;
+  border-top: none;
+  border-right: 2px dashed white;
+  border-bottom: 2px dashed white;
+}
+
+.todo-table .table-head th:first-child {
+  border-left: none;
+}
+
+.todo-table .table-head th:last-child {
+  border-right: none;
+}
+
+.table-body .table-row td {
+  border-right: 2px dashed white;
+  border-bottom: 2px dashed white;
+}
+
+.table-body .table-row td:first-child {
+  border-left: none;
+}
+
+.table-body .table-row td:last-child {
+  border-right: none;
+}
+
+.table-body .table-row {
+  text-align: center;
+  color: white;
+}
+
+.table-body .table-row .action .edit,
+.table-body .table-row .action .delete {
+  background: none;
+}
+
+.no-row {
+  text-align: center;
+  color: white;
+}
+
+.table-row .action {
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  /* background-color: rebeccapurple; */
+}
+
+.table-row .action .edit,
+.table-row .action .delete,
+.table-row .action .check {
+  font-size: 20px;
+}
+
+.table-row .action .edit:hover {
+  color: orange;
+  transition: all 0.3s ease-in-out;
+}
+
+.table-row .action .delete:hover {
+  color: red;
+  transition: all 0.3s ease-in-out;
+}
+
+.table-row .action .check:hover {
+  color: green;
+  transition: all 0.3s ease-in-out;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+/*Editable */
+.todo save {
+  width: 20%;
+  padding: 4px;
+  font-size: 15px;
+  border: none;
+  background-color: green;
+  color: white;
+}
+
+.todo save:hover {
+  background-color: red;
+  transition: background-color 0.2s ease-out;
+}
+
+.tr-data {
+  width: 100%;
+  text-align: center;
+}
