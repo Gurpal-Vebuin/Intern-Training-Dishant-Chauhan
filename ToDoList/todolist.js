@@ -34,6 +34,10 @@ function addList() {
       invalue = true;
     }
   } else {
+    let trdata = document.querySelector(".tr-data");
+    if (trdata !== null) {
+      trdata.remove();
+    }
     // Process for removing the warning tag
     let p = document.querySelector(".warning");
     document.querySelector("input").value = "";
@@ -41,13 +45,13 @@ function addList() {
       p.remove();
     }
 
-    // Checking if we are in Edit mode
+    // button3ing if we are in Edit mode
     if (document.querySelector(".add").textContent === "Save") {
       editItem();
       return;
     }
 
-    // Check if the item already exists
+    // button3 if the item already exists
     let duplicate = arr.find((ele) => ele.name === input);
     if (duplicate) {
       alert("Duplicate value added");
@@ -85,14 +89,14 @@ function addList() {
     button2.textContent = "\u00D7";
     button2.id = taskNumber;
 
-    const check = document.createElement("checkbox");
-    check.classList.add("check");
-    check.innerHTML = "&#10003";
-    check.id = taskNumber;
+    const button3 = document.createElement("button");
+    button3.classList.add("check");
+    button3.innerHTML = "&#10003";
+    button3.id = taskNumber;
 
     td3.appendChild(button1);
     td3.appendChild(button2);
-    td3.appendChild(check);
+    td3.appendChild(button3);
 
     tr.appendChild(td1);
     tr.appendChild(td2);
@@ -102,7 +106,6 @@ function addList() {
 
     arr.push(tempObj);
     addLocal(arr); // Save to localStorage
-    console.log(arr);
 
     // Editing the elements
     button1.addEventListener("click", editItem);
@@ -113,15 +116,18 @@ function addList() {
       if (window.confirm("Sure you want to delete? ")) {
         e.target.closest("tr").remove();
         reindexItems();
+        console.log(arr);
         addLocal(arr);
+        displayList();
       }
     });
-
-    // Checking the elements
-    check.addEventListener("click", (e) => {
+    // checking the elements
+    button3.addEventListener("click", (e) => {
       for (let i = 0; i < arr.length; i++) {
         if (arr[i].id === parseFloat(e.target.id)) {
-          const taskText = e.target.closest("tr").querySelector("td:nth-child(2)");
+          const taskText = e.target
+            .closest("tr")
+            .querySelector("td:nth-child(2)");
           if (taskText) {
             if (arr[i].isCompleted) {
               taskText.style.textDecoration = "none";
@@ -141,6 +147,21 @@ function addList() {
 }
 
 function editItem(event) {
+  let editdisabled = document.querySelectorAll('.edit');
+  let disabled = document.querySelectorAll('.delete');
+  let checkdisabled = document.querySelectorAll('.check');
+
+  editdisabled.forEach((editdisable)=>{
+    editdisable.setAttribute('disabled',true);
+  })
+  disabled.forEach((disable)=>{
+    disable.setAttribute('disabled',true);
+  })
+
+  checkdisabled.forEach((button3disable)=>{
+    button3disable.setAttribute('disabled',true);
+  })
+
   let x = arr.filter((ele) => ele.id === parseFloat(event.target.id));
   console.log(x);
 
@@ -198,20 +219,21 @@ function displayList() {
       td.classList.add("no-row");
       td.colSpan = 3;
       tr.appendChild(td);
+      td.style.padding = "10px";
+      td.style.fontSize = "20px";
       td.textContent = "No items to preview"; // Message when no items
     } else {
       arr.forEach((item) => {
-        console.log(document.querySelector('.tr-data'));
         let tr = document.createElement("tr");
         tr.classList.add("table-row");
 
         const td1 = document.createElement("td");
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");
-        td3.classList.add("action");
-
+        
         td1.textContent = item.id;
         td2.textContent = item.name;
+        td3.classList.add("action");
 
         const button1 = document.createElement("button");
         button1.classList.add("edit");
@@ -223,14 +245,14 @@ function displayList() {
         button2.textContent = "\u00D7";
         button2.id = item.id;
 
-        const check = document.createElement("checkbox");
-        check.classList.add("check");
-        check.innerHTML = item.isCompleted ? "&#10004" : "&#10003"; // Check the status of completion
-        check.id = item.id;
+        const button3 = document.createElement("button");
+        button3.classList.add("check");
+        button3.innerHTML = item.isCompleted ? "&#10004" : "&#10003"; // button3 the status of completion
+        button3.id = item.id;
 
         td3.appendChild(button1);
         td3.appendChild(button2);
-        td3.appendChild(check);
+        td3.appendChild(button3);
 
         tr.appendChild(td1);
         tr.appendChild(td2);
@@ -245,18 +267,19 @@ function displayList() {
           arr = arr.filter((ele) => ele.id !== parseFloat(e.target.id));
           if (window.confirm("Sure you want to delete? ")) {
             e.target.closest("tr").remove();
-            // Reindex the IDs after deletion to maintain sequential order
             reindexItems();
             addLocal(arr);
-            displayList(); // Re-display the list after deletion
+            displayList();  
           }
         });
 
-        // Checking the items
-        check.addEventListener("click", (e) => {
+        // checking the items
+        button3.addEventListener("click", (e) => {
           for (let i = 0; i < arr.length; i++) {
             if (arr[i].id === parseFloat(e.target.id)) {
-              const taskText = e.target.closest("tr").querySelector("td:nth-child(2)");
+              const taskText = e.target
+                .closest("tr")
+                .querySelector("td:nth-child(2)");
               if (taskText) {
                 if (arr[i].isCompleted) {
                   taskText.style.textDecoration = "none";
@@ -279,7 +302,8 @@ function displayList() {
 
 function reindexItems() {
   arr.forEach((item, index) => {
-    item.id = index + 1; 
+    item.id = index + 1;
   });
-  addLocal(arr); 
+
+  addLocal(arr);
 }

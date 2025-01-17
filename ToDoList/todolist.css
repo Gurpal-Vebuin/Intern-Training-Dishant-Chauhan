@@ -35,15 +35,19 @@
 }
 
 .todo input[type="text"] {
-  padding: 3px;
+  border: none;
+  border-radius: 20px;
+  padding: 7px;
   font-weight: 600;
 }
 
+
 .todo button {
   width: 20%;
-  padding: 4px;
+  padding: 7px;
   font-size: 15px;
   border: none;
+  border-radius: 8px;
   background-color: red;
   color: white;
 }
@@ -96,6 +100,10 @@
   background: none;
 }
 
+.table-body .table-row .action .check {
+  background: none;
+}
+
 .no-row {
   text-align: center;
   color: white;
@@ -107,7 +115,6 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  /* background-color: rebeccapurple; */
 }
 
 .table-row .action .edit,
@@ -123,11 +130,6 @@
 
 .table-row .action .delete:hover {
   color: red;
-  transition: all 0.3s ease-in-out;
-}
-
-.table-row .action .check:hover {
-  color: green;
   transition: all 0.3s ease-in-out;
 }
 
