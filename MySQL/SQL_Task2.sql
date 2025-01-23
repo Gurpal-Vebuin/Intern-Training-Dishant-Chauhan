@@ -1,29 +1,29 @@
 CREATE TABLE worker(
-  worker_id INT AUTO_INCREMENT PRIMARY KEY,
-  first_name VARCHAR(50) NOT NULL,
-  last_name VARCHAR(50) NOT NULL,
-  salary DECIMAL(10,2) NOT NULL,
-  joining_date DATE NOT NULL,
-  department VARCHAR(20) NOT NULL
+  worker_id int auto_increment primary key,
+  first_name varchar(50) not null,
+  last_name varchar(50) not null,
+  salary decimal(10,2) not null,
+  joining_date date not null,
+  department varchar(20) not null
 );
 
 CREATE TABLE title(
-  worker_ref_id INT NOT NULL,
-  worker_title VARCHAR(20) NOT NULL,
-  affected_from DATE NOT NULL,
-  FOREIGN KEY(worker_ref_id) REFERENCES worker(worker_id)
+  worker_ref_id int not null,
+  worker_title varchar(20) not null,
+  affected_from date not null,
+  foreign key(worker_ref_id) references worker(worker_id)
 );
 
 CREATE TABLE bonus(
-  worker_ref_id INT NOT NULL,
-  bonus_date DATE NOT NULL,
-  bonus_amount DECIMAL(10,2) NOT NULL,
-  FOREIGN KEY(worker_ref_id) REFERENCES worker(worker_id)
+  worker_ref_id int not null,
+  bonus_date date not null,
+  bonus_amount decimal(10,2) not null,
+  foreign key(worker_ref_id) references worker(worker_id)
 );
 
--- Corrected INSERT statements
-INSERT INTO worker (WORKER_ID, FIRST_NAME, LAST_NAME, SALARY, JOINING_DATE, DEPARTMENT)
-VALUES
+--  Inserting the data
+insert into worker (worker_id, first_name, last_name, salary, joining_date, department)
+values
 (1, 'Monika', 'Patel', 100000, '2014-02-20', 'HR'),
 (2, 'Niharika', 'Verma', 80000, '2014-06-11', 'Admin'),
 (3, 'Vishal', 'Singhal', 300000, '2014-02-20', 'HR'),
@@ -33,8 +33,8 @@ VALUES
 (7, 'Satish', 'Kumar', 75000, '2014-01-20', 'Account'),
 (8, 'Geetika', 'Chauhan', 90000, '2014-04-11', 'Admin');
 
-INSERT INTO title (WORKER_REF_ID, WORKER_TITLE, AFFECTED_FROM)
-VALUES
+insert into title (worker_ref_id,worker_title , affected_fromw)
+values
 (1, 'Manager', '2016-02-20'),
 (2, 'Executive', '2016-06-11'),
 (8, 'Executive', '2016-06-11'),
@@ -44,8 +44,8 @@ VALUES
 (6, 'Lead', '2016-06-11'),
 (3, 'Lead', '2016-06-11');
 
-INSERT INTO bonus (WORKER_REF_ID, BONUS_DATE, BONUS_AMOUNT)
-VALUES
+insert into bonus (worker_ref_id, bonus_date, bonus_amount)
+values
 (1, '2016-02-20', 5000),
 (2, '2016-06-11', 3000),
 (3, '2016-02-20', 4000),
@@ -57,17 +57,13 @@ select * from title;
 select * from bonus;
 
 -- Q-1. Write an SQL query to print the first three characters of  FIRST_NAME from Worker table.					
-select Substring(first_name,1,3)
+select Substring(first_name,1,3) as FIRST_NAME
 from worker;
 					
 -- Q-2. Write an SQL query to show only odd rows from a table.					
 with working_row as (
 	select *,ROW_NUMBER() over() as row_num from worker
 ) select * from working_row where row_num%2 <> 0;
-
-select *
-from worker
-where worker_id %2 <> 0;
 					
 -- Q-3. Write an SQL query to print details of the Workers whose FIRST_NAME ends with ‘h’ and contains six alphabets.					
 select *
@@ -75,7 +71,7 @@ from worker
 where first_name like '%h' and length(first_name) = 6;
 					
 -- Q-4. Write an SQL query to fetch the count of employees working in the department ‘Admin’.					
-select department,count(worker_id)
+select count(worker_id)
 from worker
 where department = 'Admin';
 					
@@ -120,7 +116,7 @@ select rtrim(first_name)
 from worker;
 
 -- Q-13. Write an SQL query to print the FIRST_NAME from Worker table after replacing ‘a’ with ‘A’.					
-select replace(first_name,'a','A')
+select replace(first_name,'a','A') as FIRST_NAME
 from worker;
 
 -- Q-14. Write an SQL query to print the FIRST_NAME and LAST_NAME from Worker table into a single column COMPLETE_NAME. 

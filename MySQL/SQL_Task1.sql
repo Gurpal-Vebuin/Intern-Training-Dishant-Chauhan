@@ -86,7 +86,10 @@ INSERT INTO EMPLOYEES (emp_id, emp_name, job, salary, commission, dept_id, hire_
 (48, 'Carter Scott', 'Salesman', 12000, 15000, 20, '2001-05-27', '101 Maple Rd', 'Los Angeles', 2),
 (49, 'Amos Young', 'Clerk', 6000, 0, 10, '2005-09-18', '202 Cedar Blvd', 'Phoenix', 1),
 (50, 'Zoe Mitchell', 'Manager', 15000, 6000, 30, '2004-03-07', '303 Birch Rd', 'Chicago', 2),
-(51, 'Mohak Mangalam', 'Ownee', 80000, 35000, 30, '2001-08-21', 'California', 'Sant-Lewis', 3);
+(51, 'Mohak Mangalam', 'Ownee', 80000, 35000, 30, '2001-08-21', 'California', 'Sant-Lewis', 3),
+(52, 'Dwayne Smith', 'Manager', 12000, 500, 30, '2024-06-12', '123 Elm St', 'New York', 1),
+(53, 'Roman Regiens', 'Analyst', 15000, 25000, 30, '2024-01-31', 'Lol-Ranks', 'Canteen', 3);
+
 
 update employees
 set dept_id=10
@@ -147,14 +150,12 @@ on e.company_id = c.company_id
 where c.company_name = 'First Bank Corporation' and salary>10000;
 
 -- 2. Select the employees in department 30
-select e.emp_name,d.dept_name from
-employees e
-JOIN
-departments d
-on e.dept_id = d.dept_id;
+select * from employees
+where dept_id = 30;
 
--- 3. List the names, numbers and departments of all clerks. *
-select e.emp_name,e.emp_id,d.dept_name 
+-- 3. List the names, numbers and departments of all clerks. 
+select * from employee;
+select e.emp_name,e.emp_id,dept_name
 from employees e
 JOIN
 departments d
@@ -162,41 +163,28 @@ on e.dept_id = d.dept_id
 where e.job = 'Clerk';
 
 -- 4. Find the department numbers and names of employees of all departments with deptno greater than 20. *
-select e.emp_name,d.dept_id,d.dept_name
-from employees e
-JOIN
-departments d
-on e.dept_id = d.dept_id
-where d.dept_id>20;
+select dept_id,emp_name
+from employees
+where dept_id>20;
 
 -- 5. Find employees whose commission is greater than their salaries. *
-select e1.emp_name,e1.commission,e2.salary
-from employees e1
-JOIN 
-employees e2
-on e1.emp_id = e2.emp_id
-where e1.commission < e2.salary;
+select *
+from employees
+where commission > salary;
 
 -- 6. Find employees whose commission is greater than 60 % of their salaries.
 select emp_name from employees 
 where commission > (0.6) * salary;
 
 -- 7. List name, job and salary of all employees in department 20 who earn more than 2000/-.
--- select e.emp_name,e.job,e.salary,e.dept_id
--- from employees as e
--- JOIN
--- departments as d
--- on e.dept_id = d.dept_id
--- where d.dept_id = 20 and e.salary>2000;
 select emp_name,job,salary
 from employees
 where dept_id=20 and salary>2000;
 
 -- 8. Find all salesmen in department 30 whose salary is greater than 1500/-
-select * from employees;
 select emp_name 
 from employees
-where department;
+where job='salesman' and dept_id = 30 and salary>1500;
 
 -- 9. Find all employees whose designation is either manager or president.
 select *
@@ -209,8 +197,6 @@ from employees
 where job='manager' and dept_id <>  30;
 
 -- 11. Find all the details of managers and clerks in dept 10.
-select * from employees
-where dept_id=10;
 select * 
 from employees
 where dept_id=10 and (job='manager' or job='clerk');
@@ -237,7 +223,7 @@ order by job;
 -- 15. Find the names of employees who earn between 1200/- and 1400/-.
 select *
 from employees
-where salary>1200 and salary<1400;
+where salary between 1200 and 1400;
 
 -- 16. Find the employees who are clerks, analysts or salesmen.
 select *
@@ -257,9 +243,8 @@ from employees
 where commission = 0;
 
 -- 19. Find the different jobs of employees receiving commission.
-select *
-from employees where commission>0
-or emp_name;
+select job
+from employees where commission>0;
 
 -- 20. Find the employees who do not receive commission or whose commission is less than 100/-.
 select *
@@ -267,12 +252,12 @@ from employees
 where commission=0 or commission<180;
 
 -- 21. If all the employees not receiving commission is entitles to a bonus of Rs. 250/- show the net earnings of all the employees. *
-SELECT emp_name,job,salary,commission, 
+SELECT emp_name,salary,commission, 
        IF(commission = 0, salary + 250, salary) AS `Net-Salary`
 FROM employees;
 
 -- 22. Find all the employees whose total earning is greater than 2000/- .
-SELECT emp_name,job,salary,commission, 
+SELECT emp_name,salary,commission, 
        IF(commission = 0, salary + 250, salary) AS `Net-Salary`
 FROM employees
 where salary > 2000;
@@ -282,14 +267,14 @@ select emp_name
 from employees
 where emp_name regexp '^m.*m$';
 
-select emp_name
-from employees
-where emp_name like 'm%m' or 'M%M';
+-- select emp_name
+-- from employees
+-- where emp_name like 'm%m' or 'M%M';
 
 -- 24. Find all the employees whose names contain the letter ‘M’ in any case.
 select *
 from employees
-where emp_name regexp '[m]';
+where emp_name regexp '[mM]';
 
 -- 25. Find all the employees whose names are up to 15 character long and have letter ‘R’ as 3rd character of their names.
 select *
@@ -302,36 +287,33 @@ from employees
 where monthname(hire_date) = 'february';
 
 -- 27. Find all the employees who were hired on last day of the month.
-INSERT INTO EMPLOYEES (emp_id, emp_name, job, salary, commission, dept_id, hire_date, address, city, company_id) VALUES
-(53, 'Roman Regiens', 'Analyst', 15000, 25000, 30, '2024-01-31', 'Lol-Ranks', 'Canteen', 3);
-
 select *
 from employees
-where Day(Last_Day(hire_date)) = Date_Format(hire_date,'%d');
+where Date_Format(Last_Day(hire_date),'%d') = Date_Format(hire_date,'%d');
 
 -- or
-select*
-from employees
-where
-  (
-    DATE_FORMAT(hire_date, '%b') IN ('Jan', 'Mar', 'May', 'Jul', 'Aug', 'Oct', 'Dec') 
-    and DATE_FORMAT(hire_date, '%d') = '31'
-  )
-  or
-  (
-    DATE_FORMAT(hire_date, '%b') IN ('Apr', 'Jun', 'Sep', 'Nov') 
-    and DATE_FORMAT(hire_date, '%d') = '30'
-  )
-  or
-  (
-	DATE_FORMAT(hire_date, '%b') = 'Feb' 
-	AND (
-    (DATE_FORMAT(hire_date, '%Y') % 4 = 0 AND DATE_FORMAT(hire_date, '%d') = '29') 
-    OR 
-    (DATE_FORMAT(hire_date, '%Y') % 4 != 0 AND DATE_FORMAT(hire_date, '%d') = '28') 
-	)
-  )
-order by hire_date;
+-- select*
+-- from employees
+-- where
+--   (
+--     DATE_FORMAT(hire_date, '%b') IN ('Jan', 'Mar', 'May', 'Jul', 'Aug', 'Oct', 'Dec') 
+--     and DATE_FORMAT(hire_date, '%d') = '31'
+--   )
+--   or
+--   (
+--     DATE_FORMAT(hire_date, '%b') IN ('Apr', 'Jun', 'Sep', 'Nov') 
+--     and DATE_FORMAT(hire_date, '%d') = '30'
+--   )
+--   or
+--   (
+-- 	DATE_FORMAT(hire_date, '%b') = 'Feb' 
+-- 	AND (
+--     (DATE_FORMAT(hire_date, '%Y') % 4 = 0 AND DATE_FORMAT(hire_date, '%d') = '29') 
+--     OR 
+--     (DATE_FORMAT(hire_date, '%Y') % 4 != 0 AND DATE_FORMAT(hire_date, '%d') = '28') 
+-- 	)
+--   )
+-- order by hire_date;
 
 -- 28. Find all the employees who were hired more than 2 years ago.
 select *
@@ -374,7 +356,7 @@ select replace(emp_name,'A','a') as Emp_Name
 from employees;
 
 -- 37. Display the names of all the employees and position where the string ‘AR’ occurs in the name.
-select emp_name,job,locate('AR',emp_name) as Position
+select emp_name,locate('AR',emp_name) as Position
 from employees 
 where emp_name like '%AR%' or emp_name like '%ar%';
 
@@ -394,17 +376,15 @@ from employees
 order by job desc, salary asc;
 
 -- 41. List the employee names, department names and salary for those employees who have completed 1 year of service.
-INSERT INTO EMPLOYEES (emp_id, emp_name, job, salary, commission, dept_id, hire_date, address, city, company_id) VALUES
-(52, 'Dwayne Smith', 'Manager', 12000, 500, 30, '2024-06-12', '123 Elm St', 'New York', 1);
-
 select * 
 from employees as e
 join departments as d
 on e.dept_id = d.dept_id
 where (Date_Format(current_date(),'%Y') - Date_Format(hire_date,'%Y') = 1) ;
 
--- 42. List the employee names, department names and hiredate for those employees who have joined in 2003 . Sort your output in the order of joining date.
-select * 
+-- 42. List the employee names, department names and hiredate for those employees who have joined in 2003.
+--  Sort your output in the order of joining date.
+select e.emp_name,d.dept_name,e.hire_date
 from employees as e
 join departments as d
 on e.dept_id = d.dept_id
