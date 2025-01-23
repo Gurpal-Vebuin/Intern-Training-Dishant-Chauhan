@@ -45,13 +45,13 @@ function addList() {
       p.remove();
     }
 
-    // button3ing if we are in Edit mode
+    // checking if the button is in editmore or not.
     if (document.querySelector(".add").textContent === "Save") {
       editItem();
       return;
     }
 
-    // button3 if the item already exists
+    // checking if the item already exists
     let duplicate = arr.find((ele) => ele.name === input);
     if (duplicate) {
       alert("Duplicate value added");
@@ -147,20 +147,20 @@ function addList() {
 }
 
 function editItem(event) {
-  let editdisabled = document.querySelectorAll('.edit');
-  let disabled = document.querySelectorAll('.delete');
-  let checkdisabled = document.querySelectorAll('.check');
+  let editdisabled = document.querySelectorAll(".edit");
+  let disabled = document.querySelectorAll(".delete");
+  let checkdisabled = document.querySelectorAll(".check");
 
-  editdisabled.forEach((editdisable)=>{
-    editdisable.setAttribute('disabled',true);
-  })
-  disabled.forEach((disable)=>{
-    disable.setAttribute('disabled',true);
-  })
+  editdisabled.forEach((editdisable) => {
+    editdisable.setAttribute("disabled", true);
+  });
+  disabled.forEach((disable) => {
+    disable.setAttribute("disabled", true);
+  });
 
-  checkdisabled.forEach((button3disable)=>{
-    button3disable.setAttribute('disabled',true);
-  })
+  checkdisabled.forEach((button3disable) => {
+    button3disable.setAttribute("disabled", true);
+  });
 
   let x = arr.filter((ele) => ele.id === parseFloat(event.target.id));
   console.log(x);
@@ -174,11 +174,17 @@ function editItem(event) {
   let id = x[0].id;
   console.log(id);
 
-  document.querySelector(".add").className = "save";
-  document.querySelector(".save").textContent = "Save";
-  document.querySelector(".save").style.backgroundColor = "green";
+  let saveButton = document.querySelector(".add");  
+  if (!saveButton) {
+    console.error("Save button not found!");
+    return;
+  }
 
-  document.querySelector(".save").onclick = function () {
+  saveButton.className = "save";  
+  saveButton.textContent = "Save";
+  saveButton.style.backgroundColor = "green";
+
+  saveButton.onclick = function () {
     let updatedName = initialInput.value;
 
     let itemToUpdate = arr.find((ele) => ele.id === id);
@@ -188,17 +194,19 @@ function editItem(event) {
 
     console.log("Updated item:", itemToUpdate);
 
-    addLocal(arr);
+    addLocal(arr);  
+    displayList();  
 
     // Reset the button to Add
-    document.querySelector(".save").textContent = "Add";
-    document.querySelector(".save").className = "add";
-    document.querySelector(".add").style.backgroundColor = "red";
+    saveButton.textContent = "Add";
+    saveButton.className = "add";
+    saveButton.style.backgroundColor = "red";
 
-    initialInput.value = "";
-    displayList();
+    initialInput.value = "";  
+    saveButton.onclick = addList;
   };
 }
+
 
 function addLocal(items) {
   localStorage.setItem("event", JSON.stringify(items));
@@ -230,7 +238,7 @@ function displayList() {
         const td1 = document.createElement("td");
         const td2 = document.createElement("td");
         const td3 = document.createElement("td");
-        
+
         td1.textContent = item.id;
         td2.textContent = item.name;
         td3.classList.add("action");
@@ -269,7 +277,7 @@ function displayList() {
             e.target.closest("tr").remove();
             reindexItems();
             addLocal(arr);
-            displayList();  
+            displayList();
           }
         });
 
