@@ -94,7 +94,7 @@ function addList(): void {
         isCompleted: false,
       };
 
-      let tr = document.createElement("tr");
+      let tr = document.createElement("tr") as HTMLTableRowElement;
       tr.classList.add("table-row");
 
       const td1 = document.createElement("td") as HTMLTableCellElement;
