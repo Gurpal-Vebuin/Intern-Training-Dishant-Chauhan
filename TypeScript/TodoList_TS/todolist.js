@@ -1,8 +1,10 @@
+var _a;
 var invalue = false;
-var arr = [];
+var arr = JSON.parse((_a = localStorage.getItem("event")) !== null && _a !== void 0 ? _a : "[]");
 // Adding the content
 var todoBody = document.querySelector(".table-body");
 window.onload = function () {
+    console.log("here");
     displayList();
 };
 function noItemstoPreview() {
@@ -187,47 +189,43 @@ function addLocal(items) {
     localStorage.setItem("event", JSON.stringify(items));
 }
 function displayList() {
-    var savedItems = localStorage.getItem("event");
-    if (savedItems) {
-        arr = JSON.parse(savedItems);
-        todoBody.innerHTML = "";
-        if (arr.length === 0) {
-            noItemstoPreview();
-        }
-        else {
-            arr.forEach(function (item) {
-                var tr = document.createElement("tr");
-                tr.classList.add("table-row");
-                var td1 = document.createElement("td");
-                var td2 = document.createElement("td");
-                var td3 = document.createElement("td");
-                td1.textContent = item.id.toString();
-                td2.textContent = item.name;
-                td3.classList.add("action");
-                var button1 = document.createElement("button");
-                button1.classList.add("edit");
-                button1.innerHTML = "&#9998";
-                button1.id = item.id.toString();
-                var button2 = document.createElement("button");
-                button2.classList.add("delete");
-                button2.textContent = "\u00D7";
-                button2.id = item.id.toString();
-                var button3 = document.createElement("button");
-                button3.classList.add("check");
-                button3.innerHTML = item.isCompleted ? "&#10004" : "&#10003";
-                button3.id = item.id.toString();
-                td3.appendChild(button1);
-                td3.appendChild(button2);
-                td3.appendChild(button3);
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                tr.appendChild(td3);
-                todoBody.appendChild(tr);
-                button1.addEventListener("click", editItem);
-                button2.addEventListener("click", deleteItem);
-                button3.addEventListener("click", checkedItem);
-            });
-        }
+    console.log(arr);
+    if (arr.length === 0) {
+        noItemstoPreview();
+    }
+    else {
+        arr.forEach(function (item) {
+            var tr = document.createElement("tr");
+            tr.classList.add("table-row");
+            var td1 = document.createElement("td");
+            var td2 = document.createElement("td");
+            var td3 = document.createElement("td");
+            td1.textContent = item.id.toString();
+            td2.textContent = item.name;
+            td3.classList.add("action");
+            var button1 = document.createElement("button");
+            button1.classList.add("edit");
+            button1.innerHTML = "&#9998";
+            button1.id = item.id.toString();
+            var button2 = document.createElement("button");
+            button2.classList.add("delete");
+            button2.textContent = "\u00D7";
+            button2.id = item.id.toString();
+            var button3 = document.createElement("button");
+            button3.classList.add("check");
+            button3.innerHTML = item.isCompleted ? "&#10004" : "&#10003";
+            button3.id = item.id.toString();
+            td3.appendChild(button1);
+            td3.appendChild(button2);
+            td3.appendChild(button3);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            todoBody.appendChild(tr);
+            button1.addEventListener("click", editItem);
+            button2.addEventListener("click", deleteItem);
+            button3.addEventListener("click", checkedItem);
+        });
     }
 }
 function reindexItems() {

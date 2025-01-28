@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do List</title>
-    <link rel="stylesheet" href="/dist/css/index.css">
+    <link rel="stylesheet" href="/dist/css/index.css" />
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/@babel/preset-typescript"></script>
+    <script
+      type="text/babel"
+      src="/TodoList_TS/todolist.ts"
+      data-presets="typescript"
+    ></script>
   </head>
   <body>
     <h1 class="todo-head">To Do List</h1>
@@ -17,11 +25,11 @@
       <table class="todo-table">
         <thead class="table-head">
           <!-- <tr class="table-row"> -->
-            <th>Task-No.</th>
-            <th>Task Name</th>
-            <th>Action</th>
+          <th>Task-No.</th>
+          <th>Task Name</th>
+          <th>Action</th>
           <!-- </tr> -->
-          </thead>
+        </thead>
         <tbody class="table-body">
           <!-- <tr class="table-row">
             <td>1</td>
@@ -32,8 +40,10 @@
               <button class="check">&#10003;</button>
             </td>
           </tr> -->
+        </tbody>
       </table>
     </div>
-    <script src="todolist.js"></script>
   </body>
+
+  <!-- <script src="/TodoList_TS/todolist.js"></script> -->
 </html>

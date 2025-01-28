@@ -1,12 +1,60 @@
 let invalue: boolean = false;
-let arr: any = [];
-
+let arr: obj[] = JSON.parse(localStorage.getItem("event") ?? "[]");
 // Adding the content
 let todoBody = document.querySelector(".table-body") as HTMLElement;
+function displayList(): void {
+  console.log(arr);
+  if (arr.length === 0) {
+    noItemstoPreview();
+  } else {
+    arr.forEach((item: obj) => {
+      let tr: HTMLTableRowElement = document.createElement("tr");
+      tr.classList.add("table-row");
 
-window.onload = function (): void {
-  displayList();
-};
+      const td1: HTMLTableCellElement = document.createElement("td");
+      const td2: HTMLTableCellElement = document.createElement("td");
+      const td3: HTMLTableCellElement = document.createElement("td");
+
+      td1.textContent = item.id.toString();
+      td2.textContent = item.name;
+      td3.classList.add("action");
+
+      const button1: HTMLButtonElement = document.createElement("button");
+      button1.classList.add("edit");
+      button1.innerHTML = "&#9998";
+      button1.id = item.id.toString();
+
+      const button2: HTMLButtonElement = document.createElement("button");
+      button2.classList.add("delete");
+      button2.textContent = "\u00D7";
+      button2.id = item.id.toString();
+
+      const button3: HTMLButtonElement = document.createElement("button");
+      button3.classList.add("check");
+      button3.innerHTML = item.isCompleted ? "&#10004" : "&#10003";
+      button3.id = item.id.toString();
+
+      td3.appendChild(button1);
+      td3.appendChild(button2);
+      td3.appendChild(button3);
+
+      tr.appendChild(td1);
+      tr.appendChild(td2);
+      tr.appendChild(td3);
+
+      todoBody.appendChild(tr);
+
+      button1.addEventListener("click", editItem);
+
+      button2.addEventListener("click", deleteItem);
+
+      button3.addEventListener("click", checkedItem);
+    });
+  }
+}
+displayList();
+
+// window.onload = displayList
 
 type obj = {
   name: string;
@@ -15,11 +63,11 @@ type obj = {
 };
 
 function noItemstoPreview() {
-  let tr = document.createElement("tr") as HTMLTableRowElement;
+  const tr: HTMLTableRowElement = document.createElement("tr");
   tr.classList.add("tr-data");
   todoBody.appendChild(tr);
 
-  let td = document.createElement("td") as HTMLTableCellElement;
+  const td: HTMLTableCellElement = document.createElement("td");
   td.classList.add("no-row");
   td.colSpan = 3;
   tr.appendChild(td);
@@ -29,26 +77,25 @@ function noItemstoPreview() {
 }
 
 function addList(): void {
-  let inputElement = document.querySelector("input") as HTMLInputElement | null;
+  let inputElement: HTMLInputElement | null = document.querySelector("input");
 
   if (inputElement) {
-    let input = inputElement.value.trim();
+    const input = inputElement.value.trim();
 
     if (input === "") {
       if (!invalue) {
-        let todowarning = document.querySelector(
-          ".todo-input"
-        ) as HTMLElement | null;
+        const todowarning: HTMLElement | null =
+          document.querySelector(".todo-input");
 
         if (todowarning) {
-          const p = document.createElement("p") as HTMLParagraphElement;
+          const p: HTMLParagraphElement = document.createElement("p");
           p.className = "warning";
           p.id = "warning";
           p.style.textAlign = "left";
           p.style.marginLeft = "20px";
           p.style.padding = "2px";
           p.style.color = "white";
-          const addText = document.createTextNode("Enter some value") as Text;
+          const addText: Text = document.createTextNode("Enter some value");
           p.appendChild(addText);
           todowarning.appendChild(p);
           invalue = true;
@@ -57,30 +104,30 @@ function addList(): void {
         }
       }
     } else {
-      let emptydatawarnig = document.querySelector(
-        ".tr-data"
-      ) as HTMLElement | null;
+      const emptydatawarnig: HTMLElement | null =
+        document.querySelector(".tr-data");
       if (emptydatawarnig !== null) {
         emptydatawarnig.remove();
       }
 
-      let p = document.querySelector(".warning") as HTMLElement | null;
+      const p: HTMLElement | null = document.querySelector(".warning");
       if (p !== null) {
         p.remove();
       }
 
       inputElement.value = "";
 
-      const addButton = document.querySelector(
-        ".add"
-      ) as HTMLButtonElement | null;
+      const addButton: HTMLButtonElement | null =
+        document.querySelector(".add");
 
       if (addButton && addButton.textContent === "Save") {
         editItem();
         return;
       }
 
-      let duplicate = arr.find((ele: obj) => ele.name === input);
+      let duplicate: obj | undefined = arr.find(
+        (ele: obj) => ele.name === input
+      );
       if (duplicate) {
         alert("Duplicate value added");
         return;
@@ -94,28 +141,28 @@ function addList(): void {
         isCompleted: false,
       };
 
-      let tr = document.createElement("tr") as HTMLTableRowElement;
+      const tr: HTMLTableRowElement = document.createElement("tr");
       tr.classList.add("table-row");
 
-      const td1 = document.createElement("td") as HTMLTableCellElement;
-      const td2 = document.createElement("td") as HTMLTableCellElement;
-      const td3 = document.createElement("td") as HTMLTableCellElement;
+      const td1: HTMLTableCellElement = document.createElement("td");
+      const td2: HTMLTableCellElement = document.createElement("td");
+      const td3: HTMLTableCellElement = document.createElement("td");
       td3.classList.add("action");
 
       td1.textContent = taskNumber.toString();
       td2.textContent = input;
 
-      const button1 = document.createElement("button") as HTMLButtonElement;
+      const button1: HTMLButtonElement = document.createElement("button");
       button1.classList.add("edit");
       button1.innerHTML = "&#9998";
       button1.id = taskNumber.toString();
 
-      const button2 = document.createElement("button") as HTMLButtonElement;
+      const button2: HTMLButtonElement = document.createElement("button");
       button2.classList.add("delete");
       button2.textContent = "\u00D7";
       button2.id = taskNumber.toString();
 
-      const button3 = document.createElement("button") as HTMLButtonElement;
+      const button3: HTMLButtonElement = document.createElement("button");
       button3.classList.add("check");
       button3.innerHTML = "&#10003";
       button3.id = taskNumber.toString();
@@ -148,13 +195,13 @@ function addList(): void {
 }
 
 function editItem(event?: MouseEvent): void {
-  let editdisabled = document.querySelectorAll(
+  const editdisabled = document.querySelectorAll(
     ".edit"
   ) as NodeListOf<HTMLElement>;
-  let disabled = document.querySelectorAll(
+  const disabled = document.querySelectorAll(
     ".delete"
   ) as NodeListOf<HTMLElement>;
-  let checkdisabled = document.querySelectorAll(
+  const checkdisabled = document.querySelectorAll(
     ".check"
   ) as NodeListOf<HTMLElement>;
 
@@ -174,12 +221,12 @@ function editItem(event?: MouseEvent): void {
   );
   if (x.length === 0) return;
 
-  let initialInput = document.querySelector("input") as HTMLInputElement;
+  const initialInput = document.querySelector("input") as HTMLInputElement;
   initialInput.value = x[0].name;
 
-  let id = x[0].id;
+  const id = x[0].id;
 
-  let saveButton = document.querySelector(".add") as HTMLButtonElement;
+  const saveButton = document.querySelector(".add") as HTMLButtonElement;
   if (!saveButton) {
     console.error("Save button not found!");
     return;
@@ -190,9 +237,9 @@ function editItem(event?: MouseEvent): void {
   saveButton.style.backgroundColor = "green";
 
   saveButton.onclick = function () {
-    let updatedName = initialInput.value;
+    const updatedName = initialInput.value;
 
-    let itemToUpdate = arr.find((ele: obj) => ele.id === id);
+    const itemToUpdate: obj | undefined = arr.find((ele: obj) => ele.id === id);
     if (itemToUpdate) {
       itemToUpdate.name = updatedName;
     }
@@ -221,12 +268,15 @@ function deleteItem(event?: MouseEvent): void {
   }
 }
 
-function checkedItem(event: MouseEvent): void {  
+function checkedItem(event?: MouseEvent): void {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].id === parseFloat((event?.target as HTMLElement).id)) {
-      const taskText = (event?.target as HTMLElement)
+      const taskText: HTMLElement | null | undefined = (
+        event?.target as HTMLElement
+      )
         .closest("tr")
-        ?.querySelector("td:nth-child(2)") as HTMLElement;
+        ?.querySelector("td:nth-child(2)");
+
       if (taskText) {
         if (arr[i].isCompleted) {
           taskText.style.textDecoration = "none";
@@ -249,61 +299,7 @@ function addLocal(
   localStorage.setItem("event", JSON.stringify(items));
 }
 
-function displayList(): void {
-  const savedItems = localStorage.getItem("event");
-  if (savedItems) {
-    arr = JSON.parse(savedItems);
-    todoBody.innerHTML = "";
 
-    if (arr.length === 0) {
-      noItemstoPreview();
-    } else {
-      arr.forEach((item: obj) => {
-        let tr = document.createElement("tr") as HTMLTableRowElement;
-        tr.classList.add("table-row");
-
-        const td1 = document.createElement("td") as HTMLTableCellElement;
-        const td2 = document.createElement("td") as HTMLTableCellElement;
-        const td3 = document.createElement("td") as HTMLTableCellElement;
-
-        td1.textContent = item.id.toString();
-        td2.textContent = item.name;
-        td3.classList.add("action");
-
-        const button1 = document.createElement("button") as HTMLButtonElement;
-        button1.classList.add("edit");
-        button1.innerHTML = "&#9998";
-        button1.id = item.id.toString();
-
-        const button2 = document.createElement("button") as HTMLButtonElement;
-        button2.classList.add("delete");
-        button2.textContent = "\u00D7";
-        button2.id = item.id.toString();
-
-        const button3 = document.createElement("button") as HTMLButtonElement;
-        button3.classList.add("check");
-        button3.innerHTML = item.isCompleted ? "&#10004" : "&#10003";
-        button3.id = item.id.toString();
-
-        td3.appendChild(button1);
-        td3.appendChild(button2);
-        td3.appendChild(button3);
-
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-
-        todoBody.appendChild(tr);
-
-        button1.addEventListener("click", editItem);
-
-        button2.addEventListener("click", deleteItem);
-
-        button3.addEventListener("click", checkedItem);
-      });
-    }
-  }
-}
 
 function reindexItems(): void {
   arr.forEach((item: obj, index: number) => {
