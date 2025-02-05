@@ -20,8 +20,6 @@ const updateUser = async (
   if(!targetUserId){
     throw new Error("No User Found to Update.")
   }
-  // console.log("Token User ID:", tokenUserId, "| Target User ID:", targetUserId);
-  // console.log("Toeken Role:", roles);
 
   // Users can only update their own account
   if (targetUserId !== tokenUserId) {

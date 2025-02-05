@@ -87,7 +87,6 @@ export const UserRepository: UserRepositoryPort = {
       [email]
     );
 
-    console.log(tokenUserId);
     if (tokenUserId.length === 0) {
       return null;
     }
@@ -119,7 +118,6 @@ export const UserRepository: UserRepositoryPort = {
     values.push(user.id);
     const updateQuery = `update user set ${fields.join(", ")} where id = ?`;
 
-    console.log("Executing Query:", updateQuery, "With Values:", values);
 
     const [updateResult] = await db.query<ResultSetHeader>(updateQuery, values);
     return updateResult.affectedRows > 0;

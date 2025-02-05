@@ -8,7 +8,6 @@ const updateUsersController =
     try {
       const updateData = req.body;
       const { email, roles } = res.locals.user;
-      console.log(updateData, roles);
 
       await updateUser(updateData, email, roles, userRepo);
 

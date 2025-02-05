@@ -7,7 +7,6 @@ const deleteUsers = async (
   email?: string,
   roles?: string
 ) => {
-  console.log("Delete User use case invoked.");
 
   const tokenUser = await userRepo.getTokenUserId(email);
   if (!tokenUser) {
@@ -19,13 +18,10 @@ const deleteUsers = async (
     throw new Error(`No user found with ID: ${id}`);
   }
 
-  console.log(targetUser);
   const tokenUserId = Number(tokenUser);
   const targetUserId = Number(targetUser.id);
   const targetUserRole = targetUser.roles;
 
-  // console.log(`Token User ID: ${tokenUserId}, Role: ${roles}`);
-  // console.log(`Target User ID: ${targetUserId}, Role: ${targetUserRole}`);
 
   if (roles !== "admin" && targetUserId !== tokenUserId) {
     throw new Error("Unauthorized: You can only delete your own account.");
@@ -34,7 +30,6 @@ const deleteUsers = async (
   } else {
     await userRepo.deleteUserPort(targetUserId);
 
-    console.log(`User with ID: ${targetUserId} deleted successfully.`);
   }
 };
 

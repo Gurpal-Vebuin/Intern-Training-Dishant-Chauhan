@@ -6,7 +6,6 @@ export const generateJWT = (user: any) => {
     roles: user.roles,
   };
 
-  console.log("Payload : ", payload);
   const secretKey: string = process.env.JWT_SECRET ?? "dec23";
 
   const options: jwt.SignOptions = { expiresIn: "1d" };

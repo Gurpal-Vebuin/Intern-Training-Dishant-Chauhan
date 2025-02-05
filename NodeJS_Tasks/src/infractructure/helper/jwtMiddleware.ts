@@ -21,9 +21,10 @@ const jwtMiddleware = (
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
-    return res
+    res
       .status(401)
       .send({ msg: "Authorization token is required.", success: false });
+    return;
   }
 
   try {

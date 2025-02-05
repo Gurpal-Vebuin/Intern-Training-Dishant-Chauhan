@@ -7,7 +7,6 @@ const getUsers = async (
   roles: string,
   userRepo: UserRepositoryPort
 ): Promise<User[] | User | null> => {
-  console.log(email);
   if (roles === "admin") {
     return await userRepo.getAllUsersPort();
   } else {

@@ -8,7 +8,6 @@ const getUsersControllers =
   async (_req: Request, res: Response): Promise<void> => {
     try {
       const { email, roles }: getUser = res.locals.user;
-      console.log(res.locals.user);
       const users = await getUsers(email, roles, userRepo);
 
       res.status(200).send({

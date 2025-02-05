@@ -7,10 +7,10 @@ import { deleteUsersController } from "../controllers/deleteUsersController.ts";
 import { updateUsersController } from "../controllers/updateUsersController.ts";
 import { UserRepository } from "../../infractructure/repository/userRepository/index.ts";
 import { validationDetails } from "../../infractructure/helper/joiValidation.ts";
-import joiRegisterSchema from "../../domain/entities/schema/joiRegisterSchema.ts";
-import joiLoginSchema from "../../domain/entities/schema/joiLoginSchema.ts";
-import joiUpdateSchema from "../../domain/entities/schema/joiUpdateSchema.ts";
-import joiParamsSchema from "../../domain/entities/schema/joiParamsSchema.ts";
+import joiRegisterSchema from "../../Domain/entities/schema/joiRegisterSchema.ts";
+import joiLoginSchema from "../../Domain/entities/schema/joiLoginSchema.ts";
+import joiUpdateSchema from "../../Domain/entities/schema/joiUpdateSchema.ts";
+import joiParamsSchema from "../../Domain/entities/schema/joiParamsSchema.ts";
 
 const router = express.Router();
 
@@ -29,16 +29,12 @@ router.post(
 );
 
 // GET Data || Fetch Users
-router.get(
-  "/getusers",
-  jwtMiddleware as any,
-  getUsersControllers(UserRepository)
-);
+router.get("/getusers", jwtMiddleware, getUsersControllers(UserRepository));
 
 // Patch Data || Update User
 router.patch(
   "/updateuser",
-  jwtMiddleware as any,
+  jwtMiddleware,
   validationDetails(joiUpdateSchema),
   updateUsersController(UserRepository)
 );
@@ -46,7 +42,7 @@ router.patch(
 // DELETE Data || Delete User (Placeholder)
 router.delete(
   "/deleteuser/:id",
-  jwtMiddleware as any,
+  jwtMiddleware,
   validationDetails(joiParamsSchema),
   deleteUsersController(UserRepository)
 );
