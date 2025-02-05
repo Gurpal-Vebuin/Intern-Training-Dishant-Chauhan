@@ -18,8 +18,8 @@ const updateUsersController =
       });
     } catch (error) {
       if (error instanceof Error) {
-        if (error.message.includes("No User Found")) {
-          res.status(404).send({ message: "No User Found", success: false });
+        if (error.message.includes("No user found")) {
+          res.status(404).send({ message: "No user found to update.", success: false });
         } else if (error.message === "No User found with the given token.") {
           res.status(404).send({ message: "No token found.", success: false });
         } else if (
@@ -27,7 +27,7 @@ const updateUsersController =
           "Unauthorized! You can only update your own account."
         )
           res
-            .status(403)
+            .status(401)
             .send("Unauthorized! You can only update your own account.");
         else {
           res.status(500).send("An unknown error occurred");

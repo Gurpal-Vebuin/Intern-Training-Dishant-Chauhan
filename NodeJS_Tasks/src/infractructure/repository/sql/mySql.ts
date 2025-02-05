@@ -10,7 +10,7 @@ const getUsersQuery = "select * from user";
 
 const getParticularUserQuery = "select * from user where email = ?";
 
-const getUserTypeQuery = "select id from user where id=?";
+const getUserTypeQuery = "select id, roles from user where id=?";
 
 const deleteUserQuery = "delete from user where id=?";
 

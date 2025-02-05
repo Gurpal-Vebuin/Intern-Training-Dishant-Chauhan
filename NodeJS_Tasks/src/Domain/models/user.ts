@@ -27,6 +27,7 @@ type updateUser = {
 
 type deleteUser = {
   id: string;
+  roles: string;
 };
 
 type tokenUser = {

@@ -1,4 +1,4 @@
-import { updateUser } from "../../Domain/models/user.ts";
+import { updateUser } from "../../domain/models/user.ts";
 import { UserRepository } from "../../infractructure/repository/userRepository/index.ts";
 import { UserRepositoryPort } from "../port/repositories/userRepository.ts";
 
@@ -17,15 +17,15 @@ const updateUser = async (
 
   const tokenUserId = String(tokenUser);
   const targetUserId = String(user.id);
-
-  console.log(tokenUserId === targetUserId);
-
-  console.log("Token User ID:", tokenUserId, "| Target User ID:", targetUserId);
-  console.log("Toeken Role:", roles);
+  if(!targetUserId){
+    throw new Error("No User Found to Update.")
+  }
+  // console.log("Token User ID:", tokenUserId, "| Target User ID:", targetUserId);
+  // console.log("Toeken Role:", roles);
 
   // Users can only update their own account
   if (targetUserId !== tokenUserId) {
-    throw new Error("Unauthorized! You can only update your own account.");
+    throw new Error("Unauthorized! You can only update your own account only.");
   }
 
   await userRepo.updateUserPort(user);

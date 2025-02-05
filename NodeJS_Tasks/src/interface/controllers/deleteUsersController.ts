@@ -9,41 +9,28 @@ const deleteUsersController =
       const { id } = req.params;
       const { email, roles } = res.locals.user;
 
-      if (!id) {
-        res.status(400).send({
-          success: false,
-          message: "User ID is required for deletion.",
-        });
-        return;
-      }
-
       await deleteUsers(userRepo, id, email, roles);
       res.status(200).send({
         success: true,
-        message: "User deleted successfully.",
+        message: `User with ID: ${id} has been deleted successfully.`,
       });
     } catch (error) {
       if (error instanceof Error) {
-        if (error.message === "No User Found") {
-          res.status(404).send({ message: "No user found", success: false });
-        } else if (
-          error.message ===
-          "Unauthorized: You can only delete your own account."
-        )
-          res.status(403).send({
-            message: "Unauthorized: You can only delete your own account.",
-            success: false,
-          });
-        else {
-          res.status(500).send({
-            message: "An unknown occurred.",
-            success: false,
-          });
+        console.error("Error in deleteUsersController:", error.message);
+
+        if (error.message.includes("No user found with ID")) {
+          res.status(404).json({ success: false, message: error.message });
+        } else if (error.message.includes("User authentication failed")) {
+          res.status(401).json({ success: false, message: error.message });
+        } else if (error.message.includes("Unauthorized")) {
+          res.status(401).json({ success: false, message: error.message });
+        } else if (error.message.includes("Failed to delete user")) {
+          res.status(500).json({ success: false, message: error.message });
         }
       } else {
-        res.status(500).send({
-          message: "Error occurred while deleting the user.",
+        res.status(500).json({
           success: false,
+          message: "An unexpected error occurred while deleting the user.",
         });
       }
     }

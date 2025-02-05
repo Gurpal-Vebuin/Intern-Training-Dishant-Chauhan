@@ -20,7 +20,7 @@ const loginController =
           res.status(404).send({ success: false, message: "No User Found" });
         } else if (error.message === "Invalid user data") {
           res
-            .status(400)
+            .status(401)
             .send({ success: false, message: "Invalid Credentials" });
         } else if (error.message === "Incorrect Email or Password.") {
           res.status(401).send({

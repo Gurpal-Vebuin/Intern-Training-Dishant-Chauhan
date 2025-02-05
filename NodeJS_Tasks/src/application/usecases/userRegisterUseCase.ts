@@ -1,4 +1,4 @@
-import { User } from "../../Domain/models/user.ts";
+import { User } from "../../domain/models/user.ts";
 import { UserRepository } from "../../infractructure/repository/userRepository/index.ts";
 import bcrypt from "bcrypt";
 import { UserRepositoryPort } from "../port/repositories/userRepository.ts";

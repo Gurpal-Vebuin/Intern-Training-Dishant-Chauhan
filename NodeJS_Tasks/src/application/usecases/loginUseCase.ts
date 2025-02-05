@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { UserRepositoryPort } from "../port/repositories/userRepository.ts";
-import { generateJWT } from "../../Domain/entities/schema/jwtSchema.ts";
-import { Login } from "../../Domain/models/user.ts";
+import { generateJWT } from "../../domain/entities/schema/jwtSchema.ts";
+import { Login } from "../../domain/models/user.ts";
 
 export const loginUseCase = async (
   email: string,

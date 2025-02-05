@@ -7,7 +7,7 @@ import {
   Login,
   tokenUser,
   User,
-} from "../../../Domain/models/user.js";
+} from "../../../domain/models/user.ts";
 import {
   registerQuery,
   loginUserQuery,
@@ -15,7 +15,7 @@ import {
   getParticularUserQuery,
   getUserTypeQuery,
   deleteUserQuery,
-} from "./../sql/mysql.ts";
+} from "./../sql/mySql.ts";
 
 export const UserRepository: UserRepositoryPort = {
   // Registering the User.
@@ -72,24 +72,21 @@ export const UserRepository: UserRepositoryPort = {
     return result as User[];
   },
   // Fetching the Id of the Target User
-  getTargetUserId: async (id?: string): Promise<deleteUser | null> => {
+  getTargetUser: async (id?: string): Promise<deleteUser | null> => {
     const [targetUserId] = await db.query<RowDataPacket[]>(getUserTypeQuery, [
       id,
     ]);
     if (targetUserId.length === 0) {
       return null;
     }
-    return targetUserId[0].id as deleteUser;
+    return targetUserId[0] as deleteUser;
   },
-
-  // Fetching the Token User Id.
   getTokenUserId: async (email: string): Promise<tokenUser | null> => {
     const [tokenUserId] = await db.query<RowDataPacket[]>(
       getParticularUserQuery,
       [email]
     );
-    console.log(email);
-    console.log(getParticularUserQuery);
+
     console.log(tokenUserId);
     if (tokenUserId.length === 0) {
       return null;
@@ -105,7 +102,7 @@ export const UserRepository: UserRepositoryPort = {
   },
   // Updating the User.
   updateUserPort: async (user: updateUser): Promise<boolean> => {
-    const fields: string[] = [];  
+    const fields: string[] = [];
     const values: any[] = [];
 
     for (const [key, value] of Object.entries(user)) {
@@ -120,7 +117,7 @@ export const UserRepository: UserRepositoryPort = {
     }
 
     values.push(user.id);
-    const updateQuery = `UPDATE user SET ${fields.join(", ")} WHERE id = ?`;
+    const updateQuery = `update user set ${fields.join(", ")} where id = ?`;
 
     console.log("Executing Query:", updateQuery, "With Values:", values);
 

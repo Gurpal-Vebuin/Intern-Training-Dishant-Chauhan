@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { userRegisterUseCase } from "../../application/usecases/userRegisterUseCase.ts";
-import { User } from "../../Domain/models/user.ts";
+import { User } from "../../domain/models/user.ts";
 import { UserRepositoryPort } from "../../application/port/repositories/userRepository.ts";
 
 const registerController = 

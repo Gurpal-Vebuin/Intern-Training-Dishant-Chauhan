@@ -1,4 +1,4 @@
-import { UserRepository } from "../../infractructure/repository/userRepository/index.ts";
+import { deleteUser } from "../../domain/models/user.ts";
 import { UserRepositoryPort } from "../port/repositories/userRepository.ts";
 
 const deleteUsers = async (
@@ -7,27 +7,35 @@ const deleteUsers = async (
   email?: string,
   roles?: string
 ) => {
+  console.log("Delete User use case invoked.");
+
   const tokenUser = await userRepo.getTokenUserId(email);
-  console.log(tokenUser);
   if (!tokenUser) {
-    throw new Error("No User Found");
+    throw new Error("User authentication failed. No user found.");
   }
 
+  const targetUser: deleteUser | null = await userRepo.getTargetUser(id);
+  if (!targetUser) {
+    throw new Error(`No user found with ID: ${id}`);
+  }
+
+  console.log(targetUser);
   const tokenUserId = Number(tokenUser);
-  const targetUserId = Number(id);
+  const targetUserId = Number(targetUser.id);
+  const targetUserRole = targetUser.roles;
 
-  console.log("Token User ID:", tokenUserId);
-  console.log("User Role:", roles);
+  // console.log(`Token User ID: ${tokenUserId}, Role: ${roles}`);
+  // console.log(`Target User ID: ${targetUserId}, Role: ${targetUserRole}`);
 
-  // Admin can delete any user
   if (roles !== "admin" && targetUserId !== tokenUserId) {
     throw new Error("Unauthorized: You can only delete your own account.");
-  }
-  const deleteResult = await userRepo.deleteUserPort(targetUserId); // Passing targetUserId here
-  if (!deleteResult) {
-    throw new Error("Unable to delete the given user.");
-  }
+  } else if (targetUserRole === roles) { // admin === admin
+    throw new Error("Unauthorized: Admin cannot delete another admin account.");
+  } else {
+    await userRepo.deleteUserPort(targetUserId);
 
+    console.log(`User with ID: ${targetUserId} deleted successfully.`);
+  }
 };
 
 export { deleteUsers };
