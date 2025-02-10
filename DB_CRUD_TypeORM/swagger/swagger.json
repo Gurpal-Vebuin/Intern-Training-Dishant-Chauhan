@@ -1,0 +1,226 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "REST API Documentation",
+    "version": "1.0.0",
+    "description": "API documentation for the project, generated using Swagger."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/",
+      "description": "Local server"
+    }
+  ],
+  "security": [{ "bearerAuth": [] }],
+  "apis": ["./src/interface/routes/*.ts"],
+  "paths": {
+    "/users/register": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Register the User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/postRegisterUser" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User registered Successfully!",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/postRegisterUser" },
+                "example": {
+                  "name": "John Doe",
+                  "email": "johndoe@gmail.com",
+                  "phone": "9898981232",
+                  "password": "john123",
+                  "roles": "user"
+                }
+              }
+            }
+          },
+          "409": { "description": "User already exists." },
+          "500": { "description": "Database Error! User not inserted." }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Login the User",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/postLoginUser" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User logged in successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/postLoginUser" },
+                "example": {
+                  "message": "Login Successful",
+                  "token": "dfjsfkljflkdsjfdsklfjslkj343j3jlksfd"
+                }
+              }
+            }
+          },
+          "401": { "description": "Invalid Email or Password." },
+          "404": { "description": "User Not Found." },
+          "500": { "description": "Error occurred while processing login." }
+        }
+      }
+    },
+    "/users/getusers": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Get all users",
+        "parameters": [
+          {
+            "name": "isAdmin",
+            "in": "query",
+            "description": "Filter users based on admin status",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Users fetched successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/getUser" }
+                }
+              }
+            }
+          },
+          "500": { "description": "Error Fetching Users." }
+        }
+      }
+    },
+
+    "/users/updateuser": {
+      "patch": {
+        "tags": ["users"],
+        "summary": "Update the User",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/patchUser" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "User updated successfully." },
+          "401": {
+            "description": "Unauthorized: You can only update your own account."
+          },
+          "404": { "description": "No user found to update." },
+          "500": { "description": "Error occurred while updating the user." }
+        }
+      }
+    },
+    "/users/deleteuser/{id}": {
+      "delete": {
+        "tags": ["users"],
+        "summary": "Delete the User",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID of the user to delete."
+          }
+        ],
+        "responses": {
+          "200": { "description": "User deleted successfully." },
+          "400": {
+            "description": "Failed to delete the User!."
+          },
+          "403": {
+            "description": "Unauthorized: You can only delete your own account."
+          },
+          "404": { "description": "No user found to delete." },
+          "500": { "description": "Error occurred while deleting the user." }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "postRegisterUser": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "example": "John Doe" },
+          "email": { "type": "string", "example": "johndoe@gmail.com" },
+          "phone": { "type": "string", "example": "9898981232" },
+          "password": { "type": "string", "example": "john123" },
+          "roles": {
+            "type": "string",
+            "enum": ["admin", "user"],
+            "example": "user"
+          }
+        },
+        "required": ["name", "email", "phone", "password", "roles"]
+      },
+      "postLoginUser": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string", "example": "johndoe@gmail.com" },
+          "password": { "type": "string", "example": "john123" }
+        },
+        "required": ["email", "password"]
+      },
+      "getUser": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "example": "1" },
+          "name": { "type": "string", "example": "John Doe" },
+          "email": { "type": "string", "example": "johndoe@gmail.com" },
+          "phone": { "type": "string", "example": "9898981232" },
+          "password": { "type": "string", "example": "john123" },
+          "roles": {
+            "type": "string",
+            "enum": ["admin", "user", "manager"]
+          }
+        },
+        "required": ["id", "name", "email", "phone", "password", "roles"]
+      },
+      "deleteUser": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "example": "1" }
+        },
+        "required": ["id"]
+      },
+      "patchUser": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "example": "1" },
+          "name": { "type": "string", "example": "John Doe" },
+          "phone": { "type": "string", "example": "9898981232" },
+          "password": { "type": "string", "example": "john123" }
+        },
+        "requirsed": ["id"]
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
