@@ -9,7 +9,7 @@ const registerController =
   async (req: Request, res: Response): Promise<void> => {
     try {
       const { name, email, phone, password, roles }: User = req.body;
-       const result = await userRepo.wrapTransaction(
+      const result = await userRepo.wrapTransaction(
         async (t: EntityManager) => {
           return await userRegisterUseCase(
             name,
@@ -22,19 +22,22 @@ const registerController =
           );
         }
       );
-       res
-        .status(201)
-        .send({ message: "User registered successfully!", data: result });
+      res.status(201).send({ message: "User registered successfully!" });
     } catch (error) {
       if (error instanceof Error) {
-        if (error.message === "User already exists with this email") {
+        if (error.message === "User already exists with this email.") {
           res.status(409).send({
             message: "User already registered exists",
             success: false,
           });
+        } else {
+          res.status(400).send({
+            message: "Unable to insert the User!",
+          });
         }
-      } else
+      } else {
         res.status(500).send({ message: "Database Error! User not inserted." });
+      }
     }
   };
 

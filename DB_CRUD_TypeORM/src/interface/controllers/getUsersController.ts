@@ -8,10 +8,10 @@ const getUsersControllers =
   (userRepo: UserRepositoryPort) =>
   async (req: Request, res: Response): Promise<void> => {
     try {
-      const isAdmin = req.query.isAdmin as string;
+      const isAdmin = req.query.isAdmin as string | undefined;
       const { id, roles }: getUser = res.locals.user;
       const users = await userRepo.wrapTransaction(async (t: EntityManager) => {
-        return await getUsers(id, roles, isAdmin, userRepo, t);
+        return await getUsers(id, roles, userRepo, t, isAdmin);
       });
       res.status(200).send({
         success: true,

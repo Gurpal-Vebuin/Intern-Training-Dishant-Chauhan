@@ -22,17 +22,19 @@ const jwtMiddleware = (
 ) => {
   const token = req.header("Authorization")?.replace("Bearer ", "");
   if (!token) {
-    return res
+    res
       .status(401)
       .send({ msg: "Authorization token is required.", success: false });
-  }
-
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET) as JWT_Payload;
-    res.locals.user = { id: decoded.id, roles: decoded.roles };
-    next();
-  } catch (err) {
-    res.status(401).send({ msg: "Invalid or expired token.", success: false });
+  } else {
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET) as JWT_Payload;
+      res.locals.user = { id: decoded.id, roles: decoded.roles };
+      next();
+    } catch (err) {
+      res
+        .status(401)
+        .send({ msg: "Invalid or expired token.", success: false });
+    }
   }
 };
 

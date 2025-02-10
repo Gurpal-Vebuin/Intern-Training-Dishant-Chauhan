@@ -5,18 +5,14 @@ import { UserRepositoryPort } from "../port/repositories/userRepository.ts";
 const getUsers = async (
   id: number,
   roles: string,
-  isAdmin: string,
   userRepo: UserRepositoryPort,
-  t: EntityManager
+  t: EntityManager,
+  isAdmin?: string,
 ): Promise<User[] | User | null> => {
   if (isAdmin === "true" && roles === "admin") {
-    return await userRepo.getAllUsersPort(id, t);
+    return await userRepo.getAllUsersPort(t);
   } else {
-    if (id) {
-      return await userRepo.getTargetUserPort(id, t);
-    } else {
-      return null;
-    }
+    return await userRepo.getTargetUserPort(id, t);
   }
 };
 

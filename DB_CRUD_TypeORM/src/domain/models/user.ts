@@ -1,10 +1,12 @@
+import { rolesFormat } from "../../infractructure/typeOrm/entities/userEntity.ts";
+
 // type of classes
 type User = {
   name: string;
   email: string;
   phone: string;
   password: string;
-  roles: string;
+  roles: rolesFormat;
 };
 
 type Login = {
@@ -19,7 +21,7 @@ type getUser = {
   email: string;
   phone: string;
   password: string;
-  roles: string;
+  roles: rolesFormat;
 };
 
 type updateUser = {
@@ -34,7 +36,4 @@ type deleteUser = {
   roles: string;
 };
 
-type tokenUser = {
-  id: string;
-};
-export { User, Login, getUser, updateUser, deleteUser, tokenUser };
+export { User, Login, getUser, updateUser, deleteUser };

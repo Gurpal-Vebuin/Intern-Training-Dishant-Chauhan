@@ -25,7 +25,7 @@ const deleteUsersController =
         if (errorMessage.includes("no user found with id")) {
           res.status(404).send({ success: false, message: error.message });
         } else if (errorMessage.includes("unauthorized")) {
-          res.status(403).send({ success: false, message: error.message });
+          res.status(401).send({ success: false, message: error.message });
         } else {
           res.status(400).send({ success: false, message: error.message });
         }

@@ -31,14 +31,14 @@ router.post(
 // GET Data || Fetch Users
 router.get(
   "/getusers",
-  jwtMiddleware as any,
+  jwtMiddleware,
   getUsersControllers(UserRepository)
 );
 
 // Patch Data || Update User
 router.patch(
   "/updateuser",
-  jwtMiddleware as any,
+  jwtMiddleware,
   validationDetails(joiUpdateSchema),
   updateUsersController(UserRepository)
 );
@@ -46,7 +46,7 @@ router.patch(
 // DELETE Data || Delete User (Placeholder)
 router.delete(
   "/deleteuser/:id",
-  jwtMiddleware as any,
+  jwtMiddleware,
   validationDetails(joiParamsSchema),
   deleteUsersController(UserRepository)
 );

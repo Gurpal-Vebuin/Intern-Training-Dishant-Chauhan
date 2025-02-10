@@ -27,22 +27,21 @@
         },
         "responses": {
           "201": {
-            "description": "User registered Successfully!",
-            "content": {
-              "application/json": {
-                "schema": { "$ref": "#/components/schemas/postRegisterUser" },
-                "example": {
-                  "name": "John Doe",
-                  "email": "johndoe@gmail.com",
-                  "phone": "9898981232",
-                  "password": "john123",
-                  "roles": "user"
-                }
-              }
-            }
+            "description": "User registered successfully!",
+            "success": true
           },
-          "409": { "description": "User already exists." },
-          "500": { "description": "Database Error! User not inserted." }
+          "400": {
+            "description": "Unable to insert the User!",
+            "success": false
+          },
+          "409": {
+            "description": "User already registered exists",
+            "success": false
+          },
+          "500": {
+            "description": "Database Error! User not inserted.",
+            "success": false
+          }
         }
       }
     },
@@ -60,20 +59,27 @@
         },
         "responses": {
           "200": {
-            "description": "User logged in successfully",
+            "description": "Login successful",
             "content": {
               "application/json": {
                 "schema": { "$ref": "#/components/schemas/postLoginUser" },
                 "example": {
+                  "success": true,
                   "message": "Login Successful",
                   "token": "dfjsfkljflkdsjfdsklfjslkj343j3jlksfd"
                 }
               }
             }
           },
-          "401": { "description": "Invalid Email or Password." },
-          "404": { "description": "User Not Found." },
-          "500": { "description": "Error occurred while processing login." }
+          "401": {
+            "description": "Invalid Email or Password.",
+            "success": false
+          },
+          "404": { "description": "User Not Found.", "success": false },
+          "500": {
+            "description": "Error occurred while processing login!.",
+            "success": false
+          }
         }
       }
     },
@@ -94,6 +100,7 @@
         ],
         "responses": {
           "200": {
+            "success": true,
             "description": "Users fetched successfully.",
             "content": {
               "application/json": {
@@ -104,7 +111,7 @@
               }
             }
           },
-          "500": { "description": "Error Fetching Users." }
+          "500": { "success": false, "description": "Error Fetching Users." }
         }
       }
     },
@@ -122,12 +129,22 @@
           }
         },
         "responses": {
-          "200": { "description": "User updated successfully." },
+          "200": {
+            "success": true,
+            "description": "User updated successfully."
+          },
           "401": {
+            "success": false,
             "description": "Unauthorized: You can only update your own account."
           },
-          "404": { "description": "No user found to update." },
-          "500": { "description": "Error occurred while updating the user." }
+          "404": {
+            "success": false,
+            "description": "No user found to update."
+          },
+          "500": {
+            "sucess": false,
+            "description": "Error occurred while updating the user."
+          }
         }
       }
     },
@@ -144,15 +161,26 @@
           }
         ],
         "responses": {
-          "200": { "description": "User deleted successfully." },
+          "200": {
+            "success": true,
+            "description": "User deleted successfully."
+          },
           "400": {
+            "success": false,
             "description": "Failed to delete the User!."
           },
-          "403": {
+          "401": {
+            "success": false,
             "description": "Unauthorized: You can only delete your own account."
           },
-          "404": { "description": "No user found to delete." },
-          "500": { "description": "Error occurred while deleting the user." }
+          "404": {
+            "success": false,
+            "description": "No user found to delete."
+          },
+          "500": {
+            "success": false,
+            "description": "Error occurred while deleting the user."
+          }
         }
       }
     }
@@ -164,8 +192,8 @@
         "properties": {
           "name": { "type": "string", "example": "John Doe" },
           "email": { "type": "string", "example": "johndoe@gmail.com" },
-          "phone": { "type": "string", "example": "9898981232" },
           "password": { "type": "string", "example": "john123" },
+          "phone": { "type": "string", "example": "9898981232" },
           "roles": {
             "type": "string",
             "enum": ["admin", "user"],
@@ -192,7 +220,7 @@
           "password": { "type": "string", "example": "john123" },
           "roles": {
             "type": "string",
-            "enum": ["admin", "user", "manager"]
+            "enum": ["admin", "user"]
           }
         },
         "required": ["id", "name", "email", "phone", "password", "roles"]
@@ -212,7 +240,7 @@
           "phone": { "type": "string", "example": "9898981232" },
           "password": { "type": "string", "example": "john123" }
         },
-        "requirsed": ["id"]
+        "required": ["id"]
       }
     },
     "securitySchemes": {

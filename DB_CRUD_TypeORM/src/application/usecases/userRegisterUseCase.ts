@@ -2,18 +2,18 @@ import { User } from "../../domain/models/user.ts";
 import bcrypt from "bcrypt";
 import { UserRepositoryPort } from "../port/repositories/userRepository.ts";
 import { EntityManager } from "typeorm";
+import { rolesFormat } from "../../infractructure/typeOrm/entities/userEntity.ts";
 
 export const userRegisterUseCase = async (
   name: string,
   email: string,
   phone: string,
   password: string,
-  roles: string,
+  roles: rolesFormat,
   userRepo: UserRepositoryPort,
   t: EntityManager
 ) => {
   const existingUser: boolean = await userRepo.checkUserByEmailPort(email, t);
-
   if (existingUser === true) {
     throw new Error("User already exists with this email.");
   } else {

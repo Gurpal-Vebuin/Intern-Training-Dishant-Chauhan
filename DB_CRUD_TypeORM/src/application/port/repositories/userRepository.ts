@@ -1,8 +1,6 @@
 import { EntityManager } from "typeorm";
 import {
-  deleteUser,
   Login,
-  tokenUser,
   getUser,
   updateUser,
   User,
@@ -14,10 +12,7 @@ export type UserRepositoryPort = {
     email: string,
     entityManager: EntityManager
   ): Promise<Login | null>;
-  getAllUsersPort(
-    id: number,
-    entityManager: EntityManager
-  ): Promise<getUser[] | null>;
+  getAllUsersPort(entityManager: EntityManager): Promise<getUser[] | null>;
   checkUserByEmailPort(
     email: string,
     entityManager: EntityManager

@@ -5,7 +5,7 @@ import { EntityManager } from "typeorm";
 
 const loginController =
   (userRepo: UserRepositoryPort) =>
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     try {
       const { email, password } = req.body;
       const loginUser = await userRepo.wrapTransaction(
@@ -29,12 +29,10 @@ const loginController =
           res.status(404).send({ message: "User not Found", success: false });
         }
       } else {
-        res
-          .status(500)
-          .send({
-            messsage: "Error occurred while processing login!",
-            success: false,
-          });
+        res.status(500).send({
+          message: "Error occurred while processing login!",
+          success: false,
+        });
       }
     }
   };

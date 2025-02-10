@@ -12,7 +12,7 @@ import { DeleteResult } from "typeorm/browser";
 import { wrapTransaction } from "../../helper/transaction.ts";
 
 export const UserRepository: UserRepositoryPort = {
-  // Registering the User.
+  // creating Users
   createUserPort: async (
     user: User,
     entityManager: EntityManager
@@ -48,7 +48,6 @@ export const UserRepository: UserRepositoryPort = {
       return null;
     }
 
- 
     return {
       id: result.id,
       password: result.password,
@@ -73,7 +72,6 @@ export const UserRepository: UserRepositoryPort = {
 
   // Fetch all the user's data.
   getAllUsersPort: async (
-    id: number,
     entityManager: EntityManager
   ): Promise<getUser[] | null> => {
     const userRepo = entityManager.getRepository(Users);

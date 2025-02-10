@@ -28,8 +28,8 @@ const updateUsersController =
             .send("Unauthorized! You can only update your own account only.");
         } else {
           res
-            .status(404)
-            .send({ message: "No user Found to update.", success: false });
+            .status(500)
+            .send({ message: "Error Occurred while updating the given user.", success: false });
         }
       } else {
         res.status(500).send("Error Occurred while updating the given user.");

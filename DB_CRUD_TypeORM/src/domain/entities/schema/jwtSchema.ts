@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { rolesFormat } from "../../../infractructure/typeOrm/entities/userEntity.ts";
 dotenv.config();
 
-export const generateJWT = (user: any) => {
+export const generateJWT = (user: {id: number, roles: rolesFormat}) => {
   const payload = {
     id: user.id,
     roles: user.roles,

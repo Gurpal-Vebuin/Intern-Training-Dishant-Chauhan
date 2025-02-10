@@ -16,12 +16,12 @@ app.use(express.json());
 
 const PORT: number = Number(process.env.PORT) || 4500;
 
-app.use("/user-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/users", userRoutes);
 
 AppDataSource.initialize()
-  .then(() => {
+.then(() => {
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     console.log("Database connection successful".bgGreen);
 
      app.listen(PORT, () => {
