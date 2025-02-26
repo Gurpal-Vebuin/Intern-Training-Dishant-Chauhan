@@ -1,0 +1,31 @@
+{
+  "Register": "Register",
+  "Form": {
+    "Name": "Name",
+    "Email": "Email",
+    "Phone": "Phone",
+    "Password": "Password",
+    "Roles": "Roles",
+    "Admin": "Admin",
+    "User": "User"
+  },
+  "Registered": "Already Registered?",
+  "Not Registered": "Not Registered yet?",
+  "Welcome": "Welcome",
+  "NamePlaceholder": "Enter your Name",
+  "EmailPlaceholder": "Enter your Email",
+  "PhonePlaceholder": "Enter your Phone",
+  "PasswordPlaceholder": "Enter your Password",
+  "NameWarning": "Name must not be empty",
+  "EmailWarning": "Email must not be empty",
+  "PhoneWarning": "Phone must not contain characters",
+  "PasswordWarning": "Password must be at least 8 characters long and must contain a special character",
+  "Login": "Login",
+  "Logout":"Logout",
+  "MyDetails": "My Details",
+  "Logo": "Logo",
+  "Report": {
+    "Title": "Report",
+    "Description": "This is the detailed report section."
+  }
+}

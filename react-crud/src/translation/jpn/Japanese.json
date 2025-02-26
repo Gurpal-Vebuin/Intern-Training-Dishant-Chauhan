@@ -1,0 +1,32 @@
+{
+  "Register": "登録",
+  "Form": {
+    "Name": "名前",
+    "Email": "メール",
+    "Phone": "電話番号",
+    "Password": "パスワード",
+    "Roles": "役割",
+    "Admin": "管理者",
+    "User": "ユーザー"
+  },
+  "Registered": "すでに登録していますか？",
+  "Not Registered": "まだ登録していませんか？",
+  "Welcome": "ようこそ ",
+  "NamePlaceholder": "名前を入力してください",
+  "EmailPlaceholder": "メールアドレスを入力してください",
+  "PhonePlaceholder": "電話番号を入力してください",
+  "PasswordPlaceholder": "パスワードを入力してください",
+  "NameWarning": "名前を入力してください",
+  "EmailWarning": "メールを入力してください",
+  "PhoneWarning": "電話番号には文字を含めないでください",
+  "PasswordWarning": "パスワードは8文字以上で、特殊文字を含める必要があります",
+  "Login": "ログイン",
+  "Logout": "ログアウト ",
+  "MyDetails": "私の詳細",
+  "Report": "レポート",
+  "Profile": "プロフィール",
+  "Report": {
+    "Title": "レポート",
+    "Description": "これは詳細なレポートセクションです。"
+  }
+}
