@@ -1,0 +1,118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewUserForm Component Creates a snapshot for Register Form 1`] = `
+<DocumentFragment>
+  <form
+    class="sc-dycHyt ibuWyK"
+  >
+    <h2>
+      Register
+    </h2>
+    <div
+      class="sc-dVBluf gfXbFh"
+    >
+      <label
+        class="sc-FEMpB dLTiLK"
+        for="name"
+      >
+        Form.Name
+      </label>
+      <input
+        aria-label="Form.Name"
+        class="sc-gjcoXW swbNf"
+        id="name"
+        placeholder="NamePlaceholder"
+        type="text"
+      />
+    </div>
+    <div
+      class="sc-dVBluf gfXbFh"
+    >
+      <label
+        class="sc-FEMpB dLTiLK"
+        for="email"
+      >
+        Form.Email
+      </label>
+      <input
+        aria-label="Form.Email"
+        class="sc-gjcoXW swbNf"
+        id="email"
+        placeholder="EmailPlaceholder"
+        type="email"
+      />
+    </div>
+    <div
+      class="sc-dVBluf gfXbFh"
+    >
+      <label
+        class="sc-FEMpB dLTiLK"
+        for="phone"
+      >
+        Form.Phone
+      </label>
+      <input
+        aria-label="Form.Phone"
+        class="sc-gjcoXW swbNf"
+        id="phone"
+        placeholder="PhonePlaceholder"
+        type="text"
+      />
+    </div>
+    <div
+      class="sc-dVBluf gfXbFh"
+    >
+      <label
+        class="sc-FEMpB dLTiLK"
+        for="password"
+      >
+        Form.Password
+      </label>
+      <input
+        aria-label="Form.Password"
+        class="sc-gjcoXW swbNf"
+        id="password"
+        placeholder="PasswordPlaceholder"
+        type="password"
+      />
+    </div>
+    <label
+      class="sc-FEMpB dLTiLK"
+      for="roles"
+    >
+      Form.Roles
+    </label>
+    <select
+      aria-label="Role"
+      class="sc-kfeOyU fjHYnM"
+      id="roles"
+    >
+      <option
+        class="sc-hRDKVd fidUmo"
+        value="user"
+      >
+        Form.User
+      </option>
+      <option
+        class="sc-hRDKVd fidUmo"
+        value="admin"
+      >
+        Form.Admin
+      </option>
+    </select>
+    <div>
+      <button
+        type="submit"
+      >
+        Register
+      </button>
+      <p>
+        Registered 
+        <span>
+          Login
+        </span>
+      </p>
+    </div>
+  </form>
+</DocumentFragment>
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component Generating a Snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-dycHyt loRgPy"
+    type="button"
+  >
+    <span>
+      Custom Child
+    </span>
+  </button>
+</DocumentFragment>
+`;
