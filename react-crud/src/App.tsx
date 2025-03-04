@@ -1,8 +1,4 @@
 import "./App.css";
-import "uikit/dist/css/uikit.min.css";
-import UIkit from "uikit";
-import Icons from "uikit/dist/js/uikit-icons";
-import { useEffect } from "react";
 import Navbar from "./components/organisms/navbar/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Links } from "./types/constants/Links/Links";
@@ -20,11 +16,6 @@ import CustomErrors, {
 } from "./components/molecules/customerrors/CustomErrors";
 
 function App() {
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    UIkit.use(Icons);
-  }, []);
-
   return (
     <>
       <ToastContainer position="top-center" autoClose={3000} />

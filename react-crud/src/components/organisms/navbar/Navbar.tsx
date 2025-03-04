@@ -4,7 +4,6 @@ import {
   NavLinks,
   ContentWrapper,
   NavItem,
-  RegisterButton,
 } from "../../styles/navbar/NavbarStyles";
 import SelectLanguage from "../../molecules/select/SelectLanguage";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
@@ -13,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../../../redux/features/slices/AuthSlice";
 import useLanguage from "../../../hooks/useLanguage";
 import { useUser } from "../../../hooks/useUser";
+import Button from "../../atoms/button/Button";
 
 const Navbar = () => {
   const context = useUser();
@@ -29,7 +29,7 @@ const Navbar = () => {
   };
 
   const handleReport = () => {
-    navigate(`${Links.REPORT}`,{ replace: true });
+    navigate(`${Links.REPORT}`, { replace: true });
   };
 
   const handleMyDetails = () => {
@@ -49,9 +49,7 @@ const Navbar = () => {
             <NavItem onClick={handleMyDetails}>{t("MyDetails")}</NavItem>
           )}
           {context?.isLoggedIn && (
-            <RegisterButton onClick={handleLogout}>
-              {t("Logout")}
-            </RegisterButton>
+            <Button onClick={handleLogout}>{t("Logout")}</Button>
           )}
         </NavLinks>
       </NavWrapper>

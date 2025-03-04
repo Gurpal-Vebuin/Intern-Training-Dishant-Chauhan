@@ -1,14 +1,13 @@
-import React from "react";
 import {
   Description,
   ReportCard,
   ReportWrapper,
   Title,
 } from "../../styles/report/ReportStyles";
-import useLanguage from "../../../hooks/useLanguage"; // Ensure this hook is correctly implemented
+import useLanguage from "../../../hooks/useLanguage";
 
 const Report = () => {
-  const { t } = useLanguage(); // Make sure useLanguage returns a function for translations
+  const { t } = useLanguage();
 
   return (
     <ReportWrapper>

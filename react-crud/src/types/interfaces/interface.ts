@@ -1,4 +1,5 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
+import { UseFormRegisterReturn } from "react-hook-form";
 
 export interface LangState {
   language: string;
@@ -28,8 +29,15 @@ export interface InputProps {
   label: string;
   id: string;
   placeholder: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  registerProps: any;
+  registerProps: UseFormRegisterReturn;
+}
+
+export interface ButtonPropsType {
+  type?: "button" | "submit";
+  text?: string;
+  onClick?: () => void;
+  isDisabled?: boolean;
+  children?: React.ReactNode;
 }
 
 export interface NewFormProps {
